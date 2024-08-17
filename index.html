@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>Motivational Msg App</title>
+    <style>
+      * {
+        font-family: "Cambria";
+        font-size: 40px;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: linen">
+    <center>
+      <h1>Motivational Msg App</h1>
+
+      <div id="msg_box" style="display: none">
+        <p
+          style="
+            border: 2px solid gray;
+            border-radius: 50px;
+            padding: 20px;
+            width: fit-content;
+          "
+          id="msg"
+        ></p>
+        <p
+          style="
+            border: 2px solid gray;
+            border-radius: 50px;
+            padding: 20px;
+            width: fit-content;
+          "
+          id="author"
+        ></p>
+      </div>
+
+      <script>
+        function show() {
+          let msg = document.getElementById("msg");
+          let msg_box = document.getElementById("msg_box");
+          let author = document.getElementById("author");
+          let url = "https://quotes-api-self.vercel.app/quote";
+
+          fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+              msg.innerHTML = data.quote;
+              author.innerHTML = data.author;
+              msg_box.style.display = "block";
+            })
+            .catch((error) => (msg.innerHTML = ("Error:", error)));
+        }
+
+        setInterval(() => {
+          show();
+        }, 3000);
+      </script>
+    </center>
+  </body>
+</html>
